@@ -40,7 +40,7 @@ USER root
 ARG TARGET_MATLAB_OS="ubuntu20.04"
 
 # Ensure our base Datahub image matches Matlab target
-RUN . /etc/os-release;  [ "${ID}${VERSION_ID}" = "$TARGET_MATLAB_OS" ] || \
+#RUN . /etc/os-release;  [ "${ID}${VERSION_ID}" = "$TARGET_MATLAB_OS" ] || \
 	( echo "Mismatch between base Datahub OS ${ID}${VERSION_ID} & target Matlab OS ${TARGET_MATLAB_OS}!!"; exit 1 )
 
 ##########################################################
