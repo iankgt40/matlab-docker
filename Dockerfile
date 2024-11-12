@@ -77,16 +77,16 @@ WORKDIR /
 
 # Run mpm to install MATLAB in the target location and delete the mpm installation afterwards.
 # If mpm fails to install successfully then output the logfile to the terminal, otherwise cleanup.
-RUN wget -q https://www.mathworks.com/mpm/glnxa64/mpm \ 
-    && chmod +x mpm \
-    && ionice -c 3 ./mpm install \
-    --release=${MATLAB_RELEASE} \
-    --destination=${MATLAB_INSTALL_DIR} \
-    --products ${MATLAB_PRODUCTS} \
-    ${MATLAB_DOC} \
-    || (echo "MPM Installation Failure. See below for more information:" && cat /tmp/mathworks_root.log && false) \
-    && rm -f mpm /tmp/mathworks_root.log \
-    && ln -s ${MATLAB_INSTALL_DIR}/bin/matlab /usr/local/bin/matlab 
+#RUN wget -q https://www.mathworks.com/mpm/glnxa64/mpm \ 
+#    && chmod +x mpm \
+ #   && ionice -c 3 ./mpm install \
+#    --release=${MATLAB_RELEASE} \
+#    --destination=${MATLAB_INSTALL_DIR} \
+#    --products ${MATLAB_PRODUCTS} \
+#    ${MATLAB_DOC} \
+#    || (echo "MPM Installation Failure. See below for more information:" && cat /tmp/mathworks_root.log && false) \
+#    && rm -f mpm /tmp/mathworks_root.log \
+#    && ln -s ${MATLAB_INSTALL_DIR}/bin/matlab /usr/local/bin/matlab 
 
 # The following environment variables allow MathWorks to understand how this MathWorks 
 # product (MATLAB Dockerfile) is being used. This information helps us make MATLAB even better. 
