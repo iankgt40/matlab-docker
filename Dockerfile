@@ -38,7 +38,7 @@ LABEL maintainer="UC San Diego Research IT Services Ian Kaufman <ikaufman@ucsd.e
 USER root
 
 # Targeting a new OS will likely require updates to commands below
-ARG TARGET_MATLAB_OS="ubuntu20.04"
+# ARG TARGET_MATLAB_OS="ubuntu20.04"
 
 # Ensure our base Datahub image matches Matlab target
 #RUN . /etc/os-release;  [ "${ID}${VERSION_ID}" = "$TARGET_MATLAB_OS" ] || \
@@ -46,7 +46,7 @@ ARG TARGET_MATLAB_OS="ubuntu20.04"
 
 ##########################################################
 # Pull matlab-deps container base OS package deps (Many of these dependencies already exist in our container)
-ARG MATLABDEPS_BASE_DEPS=https://raw.githubusercontent.com/mathworks-ref-arch/container-images/main/matlab-deps/${MATLAB_RELEASE}/${TARGET_MATLAB_OS}/base-dependencies.txt
+# ARG MATLABDEPS_BASE_DEPS=https://raw.githubusercontent.com/mathworks-ref-arch/container-images/main/matlab-deps/${MATLAB_RELEASE}/${TARGET_MATLAB_OS}/base-dependencies.txt
 
 #RUN curl -L -s -o /tmp/base-dependencies.txt ${MATLABDEPS_BASE_DEPS} \
 	#&& apt-get update && apt-get install --no-install-recommends -y `cat /tmp/base-dependencies.txt` \
@@ -56,7 +56,10 @@ ARG MATLABDEPS_BASE_DEPS=https://raw.githubusercontent.com/mathworks-ref-arch/co
 # Additional packages & config needed for Web usage (gleaned from 'docker history mathworks/matlab:r2022b')
 #COPY additional-matlab-dependencies.txt /tmp/additional-matlab-dependencies.txt
 #RUN apt-get update && apt-get install --no-install-recommends -y `cat /tmp/additional-matlab-dependencies.txt`     && apt-get clean && apt-get -y autoremove && rm -rf /var/lib/apt/lists/* 
-RUN apt-get update && apt-get install --no-install-recommends -y desktop-base ubuntu-session build-essential fonts-ubuntu xvfb xinit zenity && apt-get clean && apt-get -y autoremove && rm -rf /var/lib/apt/lists/*
+ENV DEBIAN_FRONTEND noninteractive
+ENV DEBCONF_NOWARNINGS="yes"
+RUN apt-get update && apt-get install --no-install-recommends -y desktop-base ubuntu-session build-essential fonts-ubuntu xvfb xinit zenity && apt-get clean \
+    && apt-get -y autoremove && rm -rf /var/lib/apt/lists/*
 
 RUN mkdir -p "/usr/share/X11/xkb"
 
@@ -103,7 +106,7 @@ ENV MW_DDUX_FORCE_ENABLE=true MW_CONTEXT_TAGS=MATLAB:DOCKERFILE:V1
 #### Matlab-specific local customization:
 # Setup our /opt/conda environment for proxying Matlab & running Matlab from Python
 RUN python3 -m pip install matlab-proxy jupyter-matlab-proxy 
-RUN ( cd ${MATLAB_INSTALL_DIR}/extern/engines/python && python setup.py install )
+# RUN ( cd ${MATLAB_INSTALL_DIR}/extern/engines/python && python setup.py install )
 
 # Supplement our runtime path, datahub-specific
 #RUN mkdir -p -m 0755 /etc/datahub-profile.d && \
