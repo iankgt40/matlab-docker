@@ -1,7 +1,7 @@
 
 ######
-## Prototype UC San Diego Datahub/DSMLP Matlab-enabled container
-## 11/2022 agt@ucsd.edu
+## Prototype UC San Diego Datahub/DSMLP Matlab-enabled container based on previous work by agt@ucsd.edu
+## 11/2024 ikaufman@ucsd.edu
 
 # FROM ucsdets/datahub-base-notebook:2023.2-stable
 # FROM ghcr.io/ucsd-ets/datascience-notebook
