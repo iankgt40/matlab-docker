@@ -100,7 +100,7 @@ WORKDIR /
 # To opt out of this service, delete the environment variables defined in the following line. 
 # See the Help Make MATLAB Even Better section in the accompanying README to learn more: 
 # https://github.com/mathworks-ref-arch/matlab-dockerfile#help-make-matlab-even-better
-ENV MW_DDUX_FORCE_ENABLE=true MW_CONTEXT_TAGS=MATLAB:DOCKERFILE:V1
+#ENV MW_DDUX_FORCE_ENABLE=true MW_CONTEXT_TAGS=MATLAB:DOCKERFILE:V1
 
 #########
 #### Matlab-specific local customization:
