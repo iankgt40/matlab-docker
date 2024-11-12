@@ -42,7 +42,7 @@ ARG TARGET_MATLAB_OS="ubuntu20.04"
 
 # Ensure our base Datahub image matches Matlab target
 #RUN . /etc/os-release;  [ "${ID}${VERSION_ID}" = "$TARGET_MATLAB_OS" ] || \
-	( echo "Mismatch between base Datahub OS ${ID}${VERSION_ID} & target Matlab OS ${TARGET_MATLAB_OS}!!"; exit 1 )
+	#( echo "Mismatch between base Datahub OS ${ID}${VERSION_ID} & target Matlab OS ${TARGET_MATLAB_OS}!!"; exit 1 )
 
 ##########################################################
 # Pull matlab-deps container base OS package deps (Many of these dependencies already exist in our container)
@@ -56,6 +56,8 @@ ARG MATLABDEPS_BASE_DEPS=https://raw.githubusercontent.com/mathworks-ref-arch/co
 # Additional packages & config needed for Web usage (gleaned from 'docker history mathworks/matlab:r2022b')
 #COPY additional-matlab-dependencies.txt /tmp/additional-matlab-dependencies.txt
 #RUN apt-get update && apt-get install --no-install-recommends -y `cat /tmp/additional-matlab-dependencies.txt`     && apt-get clean && apt-get -y autoremove && rm -rf /var/lib/apt/lists/* 
+RUN apt-get update && apt-get install --no-install-recommends -y desktop-base ubuntu-session build-essential fonts-ubuntu xvfb xinit zenity && apt-get clean && apt-get -y autoremove && rm -rf /var/lib/apt/lists/*
+
 RUN mkdir -p "/usr/share/X11/xkb"
 
 ##########################################################
@@ -66,10 +68,10 @@ RUN mkdir -p "/usr/share/X11/xkb"
 RUN mkdir -p /packages
 WORKDIR /packages
 #RUN export DEBIAN_FRONTEND=noninteractive &&    \
-	wget -q https://github.com/mathworks/build-glibc-bz-19329-patch/releases/download/ubuntu-focal/all-packages.tar.gz && \
-	tar -x -f all-packages.tar.gz --exclude glibc-*.deb --exclude libc6-dbg*.deb && \
-	apt-get install --yes --no-install-recommends ./*.deb && \
-	rm -fr /packages 
+	#wget -q https://github.com/mathworks/build-glibc-bz-19329-patch/releases/download/ubuntu-focal/all-packages.tar.gz && \
+	#tar -x -f all-packages.tar.gz --exclude glibc-*.deb --exclude libc6-dbg*.deb && \
+	#apt-get install --yes --no-install-recommends ./*.deb && \
+	#rm -fr /packages 
 WORKDIR /
 
 ###############################
@@ -105,11 +107,11 @@ RUN ( cd ${MATLAB_INSTALL_DIR}/extern/engines/python && python setup.py install 
 
 # Supplement our runtime path, datahub-specific
 #RUN mkdir -p -m 0755 /etc/datahub-profile.d && \
-	echo "export PATH=${MATLAB_INSTALL_DIR}/bin:\${PATH}" > /etc/datahub-profile.d/matlab-path.sh
+	#echo "export PATH=${MATLAB_INSTALL_DIR}/bin:\${PATH}" > /etc/datahub-profile.d/matlab-path.sh
 
 # Hardcode our campus license server for now (until we can update OPA # configuration)
 #RUN mkdir -p -m 0755 /etc/datahub-profile.d && \
-	echo "export MLM_LICENSE_FILE='1700@its-flexlm-lnx1.ucsd.edu'" > /etc/datahub-profile.d/matlab-flexlm.sh
+	#echo "export MLM_LICENSE_FILE='1700@its-flexlm-lnx1.ucsd.edu'" > /etc/datahub-profile.d/matlab-flexlm.sh
 
 ##################################################################
 # additional local customization 
