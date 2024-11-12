@@ -11,8 +11,8 @@ FROM ucsd-ets/datascience-notebook:2024.4-new-exp-2025-branch-prep
 
 # Which MATLAB release to install in the container, and where.
 # Use lower case to specify the release, for example: ARG MATLAB_RELEASE=r2021b
-ARG MATLAB_RELEASE=r2022a
-ARG MATLAB_INSTALL_DIR=/opt/matlab/${MATLAB_RELEASE}
+ARG MATLAB_RELEASE=r2020b
+ARG MATLAB_INSTALL_DIR=/datasets/software/${MATLAB_RELEASE}
 
 # Specify which products (Matlab, toolboxes) to be installed using "mpm": 
 #        https://github.com/mathworks-ref-arch/matlab-dockerfile/blob/main/MPM.md
