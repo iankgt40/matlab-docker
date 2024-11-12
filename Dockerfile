@@ -47,14 +47,14 @@ RUN . /etc/os-release;  [ "${ID}${VERSION_ID}" = "$TARGET_MATLAB_OS" ] || \
 # Pull matlab-deps container base OS package deps (Many of these dependencies already exist in our container)
 ARG MATLABDEPS_BASE_DEPS=https://raw.githubusercontent.com/mathworks-ref-arch/container-images/main/matlab-deps/${MATLAB_RELEASE}/${TARGET_MATLAB_OS}/base-dependencies.txt
 
-RUN curl -L -s -o /tmp/base-dependencies.txt ${MATLABDEPS_BASE_DEPS} \
-	&& apt-get update && apt-get install --no-install-recommends -y `cat /tmp/base-dependencies.txt` \
-	&& apt-get clean && apt-get -y autoremove && rm -rf /var/lib/apt/lists/* 
+#RUN curl -L -s -o /tmp/base-dependencies.txt ${MATLABDEPS_BASE_DEPS} \
+	#&& apt-get update && apt-get install --no-install-recommends -y `cat /tmp/base-dependencies.txt` \
+	#&& apt-get clean && apt-get -y autoremove && rm -rf /var/lib/apt/lists/* 
 
 ##########################################################
 # Additional packages & config needed for Web usage (gleaned from 'docker history mathworks/matlab:r2022b')
-COPY additional-matlab-dependencies.txt /tmp/additional-matlab-dependencies.txt
-RUN apt-get update && apt-get install --no-install-recommends -y `cat /tmp/additional-matlab-dependencies.txt`     && apt-get clean && apt-get -y autoremove && rm -rf /var/lib/apt/lists/* 
+#COPY additional-matlab-dependencies.txt /tmp/additional-matlab-dependencies.txt
+#RUN apt-get update && apt-get install --no-install-recommends -y `cat /tmp/additional-matlab-dependencies.txt`     && apt-get clean && apt-get -y autoremove && rm -rf /var/lib/apt/lists/* 
 RUN mkdir -p "/usr/share/X11/xkb"
 
 ##########################################################
