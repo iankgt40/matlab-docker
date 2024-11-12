@@ -4,8 +4,9 @@
 ## 11/2024 ikaufman@ucsd.edu
 
 # FROM ucsdets/datahub-base-notebook:2023.2-stable
+FROM ghcr.io/ucsd-ets/datahub-base-notebook
 # FROM ghcr.io/ucsd-ets/datascience-notebook
-FROM  ghcr.io/ucsd-ets/scipy-ml-notebook:2023.4-stable
+# FROM  ghcr.io/ucsd-ets/scipy-ml-notebook:2023.4-stable
 # FROM ghcr.io/ucsd-ets/datascience-notebook
 # Could be: #FROM ucsdets/scipy-ml-notebook:2022.1-stable
 
