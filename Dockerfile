@@ -64,7 +64,7 @@ RUN mkdir -p "/usr/share/X11/xkb"
 # IMPORTANT: This must be executed after any glibc updates 
 RUN mkdir -p /packages
 WORKDIR /packages
-RUN export DEBIAN_FRONTEND=noninteractive &&    \
+#RUN export DEBIAN_FRONTEND=noninteractive &&    \
 	wget -q https://github.com/mathworks/build-glibc-bz-19329-patch/releases/download/ubuntu-focal/all-packages.tar.gz && \
 	tar -x -f all-packages.tar.gz --exclude glibc-*.deb --exclude libc6-dbg*.deb && \
 	apt-get install --yes --no-install-recommends ./*.deb && \
@@ -103,11 +103,11 @@ RUN python3 -m pip install matlab-proxy jupyter-matlab-proxy
 RUN ( cd ${MATLAB_INSTALL_DIR}/extern/engines/python && python setup.py install )
 
 # Supplement our runtime path, datahub-specific
-RUN mkdir -p -m 0755 /etc/datahub-profile.d && \
+#RUN mkdir -p -m 0755 /etc/datahub-profile.d && \
 	echo "export PATH=${MATLAB_INSTALL_DIR}/bin:\${PATH}" > /etc/datahub-profile.d/matlab-path.sh
 
 # Hardcode our campus license server for now (until we can update OPA # configuration)
-RUN mkdir -p -m 0755 /etc/datahub-profile.d && \
+#RUN mkdir -p -m 0755 /etc/datahub-profile.d && \
 	echo "export MLM_LICENSE_FILE='1700@its-flexlm-lnx1.ucsd.edu'" > /etc/datahub-profile.d/matlab-flexlm.sh
 
 ##################################################################
