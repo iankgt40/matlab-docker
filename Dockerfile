@@ -19,14 +19,15 @@ ARG MATLAB_INSTALL_DIR=/datasets/software/${MATLAB_RELEASE}
 #        https://github.com/mathworks-ref-arch/matlab-dockerfile/blob/main/MPM.md
 # In brief: toolbox name format retains capitalization, replaces spaces with underlines.
 # Warning: these toolboxes can be huge.  Keep an eye on image size.
-ARG MATLAB_PRODUCTS="MATLAB Statistics_and_Machine_Learning_Toolbox"
+#ARG MATLAB_PRODUCTS="MATLAB Statistics_and_Machine_Learning_Toolbox"
 
 # See notes in matlab-deps Dockerfile regarding additional dependencies for specific Toolboxes:
 #     https://github.com/mathworks-ref-arch/container-images/blob/main/matlab-deps/r2022b/ubuntu20.04/Dockerfile
 #  Add these to ./additional-matlab-dependencies.txt
 
 # Include docs/examples. Comment out to omit.
-ARG MATLAB_DOC="--doc"
+#ARG MATLAB_DOC="--doc"
+LABEL maintainer="UC San Diego Research IT Services Ian Kaufman <ikaufman@ucsd.edu>"
 
 #############################################
 # Few user-servicable parts between this line 
